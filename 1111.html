@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ｓｔｒａｎｉｃａ ｏｂｏ ｍｎｅ</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: black;
+        }
+        .splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            font-size: 36px;
+            color: white;
+            opacity: 1;
+            transition: opacity 2s;
+        }
+        #main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Изменено на column для мобильных устройств */
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 20px; /* Отступы для мобильных устройств */
+        }
+        #header {
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0; /* Отступы для заголовка */
+            font-size: 36px;
+            color: red; /* Черный цвет */
+            margin-top: 20px; /* Опущен ниже */
+        }
+        #photo {
+            width: 100%;
+            max-width: 450px; /* Ограничение ширины для мобильных устройств */
+            height: auto;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            color: red; /* Красный цвет для текста */
+        }
+        #text span {
+            font-size: 32px; /* Увеличение размера текста */
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        button.square {
+            border-radius: 0; /* Квадратная кнопка */
+        }
+        button.oval {
+            border-radius: 25px; /* Овальная кнопка */
+        }
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: black;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 0;
+        }
+        button:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        button:hover {
+            color: white;
+        }
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('your-background-animation.gif'); /* Укажите ваш GIF */
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px; /* Размер текста на фоне */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Тень для текста */
+        }
+        .volume-control {
+            position: absolute;
+            top: 10px; /* Изменено на 10px для верхнего расположения */
+            right: 10px;
+            display: flex;
+            align-items: center;
+            background: red;
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 2; /* Увеличен z-index для отображения над другими элементами */
+        }
+        input[type="range"] {
+            margin-left: 10px;
+            -webkit-appearance: none;
+            background: black;
+            height: 5px;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: black;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #about {
+            color: red; /* Красный цвет текста */
+            margin-top: 10px;
+            text-align: center; /* Центрирование текста */
+            font-size: 24px; /* Увеличение размера текста */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="splash">
+        <span id="splash-text"></span>
+    </div>
+
+    <div id="main">
+        <div id="header">Ｄｏｂｒｏ ｐｏｚｈａｌｏｖａｔ</div>
+        <div id="photo">
+            <img src="photo1.jpeg" alt="Фото" style="width: 100%; height: auto; object-fit: cover;">
+            <div id="text">
+                <span>Ｌｏｂｏｔｏｍｙ</span>
+                <button onclick="window.open('https://t.me/lobotomyroot', '_blank')"><span>TG</span></button>
+                <div id="about">hi friend. my name is Lobotomy, I am a Mid-Level Penetration Tester. To contact me, write to me via telegram</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="volume-control">
+        <label for="volume" style="color: white;">Громкость:</label>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7"> <!-- Увеличена громкость по умолчанию -->
+    </div>
+
+    <div class="play-button-container">
+        <button id="playPauseButton" class="play-button square">
+            <span>Запустить музыку</span>
+        </button>
+    </div>
+
+    <audio id="audio">
+        <source src="background-music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает элемент audio.
+    </audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const volumeControl = document.getElementById('volume');
+        const splashText = document.getElementById('splash-text');
+        const message = "hello friend";
+        let index = 0;
+
+        // Эффект печатания
+        function typeText() {
+            if (index < message.length) {
+                splashText.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeText, 100); // Задержка между символами
+            }
+        }
+        typeText();
+
+        // Музыка начнет играть по нажатию кнопки
+        const playPauseButton = document.getElementById('playPauseButton');
+        let isPlaying = false;
+
+        playPauseButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.innerHTML = '<span>Запустить музыку</span>';
+            } else {
+                audio.play();
+                playPauseButton.innerHTML = '<span>Остановить музыку</span>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Управление звуком
+        volumeControl.addEventListener('input', (event) => {
+            audio.volume = event.target.value;
+        });
+
+        // Скрытие заставки
+        setTimeout(() => {
+            document.querySelector('.splash').style.opacity = '0';
+            setTimeout(() => {
+                document.querySelector('.splash').style.display = 'none';
+            }, 2000);
+        }, 5000);
+
+    </script>
+</body>
+</html>
+
+
